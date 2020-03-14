@@ -33,6 +33,7 @@ public class NPCTankController : AdvancedFSM
     protected override void FSMUpdate()
     {
         //Check for health
+        Debug.Log(CurrentState);
         elapsedTime += Time.deltaTime;
     }
 
@@ -82,7 +83,8 @@ public class NPCTankController : AdvancedFSM
         
         FleeState flee = new FleeState();
         flee.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-
+        flee.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+        
         AddFSMState(patrol);
         AddFSMState(chase);
         AddFSMState(attack);
@@ -94,7 +96,7 @@ public class NPCTankController : AdvancedFSM
     /// Check the collision with the bullet
     /// </summary>
     /// <param name="collision"></param>
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         //Reduce health
         if (!collision.gameObject.CompareTag("Bullet")) return;

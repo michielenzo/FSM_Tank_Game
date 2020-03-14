@@ -35,7 +35,6 @@ public class AttackState : FSMState
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
         }
         
-        Debug.Log(npc.GetComponent<NPCTankController>().health);
         if (npc.GetComponent<NPCTankController>().health < 100)
         {
             npc.GetComponent<NPCTankController>().SetTransition(Transition.Panic);

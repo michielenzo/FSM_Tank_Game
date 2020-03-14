@@ -67,7 +67,7 @@ public class AdvancedFSM : FSM
             return;
         }
 
-        // Add the state to the List if it´s not inside it
+        // Add the state to the List if itÂ´s not inside it
         foreach (FSMState state in fsmStates)
         {
             if (state.ID != fsmState.ID) continue;
@@ -92,7 +92,7 @@ public class AdvancedFSM : FSM
             return;
         }
 
-        // Search the List and delete the state if it´s inside it
+        // Search the List and delete the state if itÂ´s inside it
         foreach (FSMState state in fsmStates)
         {
             if (state.ID != fsmState) continue;
@@ -105,7 +105,7 @@ public class AdvancedFSM : FSM
     /// <summary>
     /// This method tries to change the state the FSM is in based on
     /// the current state and the transition passed. If current state
-    ///  doesn´t have a target state for the transition passed, 
+    ///  doesnÂ´t have a target state for the transition passed, 
     /// an ERROR message is printed.
     /// </summary>
     public void PerformTransition(Transition trans)

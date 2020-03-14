@@ -5,7 +5,6 @@ public class SimpleFSM : FSM
 {
     public enum FSMState
     {
-        None,
         Patrol,
         Chase,
         Attack,
@@ -194,10 +193,10 @@ public class SimpleFSM : FSM
     /// Check the collision with the bullet
     /// </summary>
     /// <param name="collision"></param>
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         //Reduce health
-        if(collision.gameObject.tag == "Bullet")
+        if(collision.gameObject.CompareTag("Bullet"))
             health -= collision.gameObject.GetComponent<Bullet>().damage;
     }   
 
@@ -215,8 +214,7 @@ public class SimpleFSM : FSM
 
         //Check Range
         //Prevent to decide the random point as the same as before
-        if (IsInCurrentRange(destPos))
-        {
+        if (IsInCurrentRange(destPos)) {
             rndPosition = new Vector3(Random.Range(-rndRadius, rndRadius), 0.0f, Random.Range(-rndRadius, rndRadius));
             destPos = pointList[rndIndex].transform.position + rndPosition;
         }
@@ -228,13 +226,11 @@ public class SimpleFSM : FSM
     /// <param name="pos">position to check</param>
     protected bool IsInCurrentRange(Vector3 pos)
     {
-        float xPos = Mathf.Abs(pos.x - transform.position.x);
-        float zPos = Mathf.Abs(pos.z - transform.position.z);
+        var position = transform.position;
+        float xPos = Mathf.Abs(pos.x - position.x);
+        float zPos = Mathf.Abs(pos.z - position.z);
 
-        if (xPos <= 50 && zPos <= 50)
-            return true;
-
-        return false;
+        return xPos <= 50 && zPos <= 50;
     }
 
     protected void Explode()
