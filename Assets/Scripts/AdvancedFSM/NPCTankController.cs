@@ -77,7 +77,8 @@ public class NPCTankController : AdvancedFSM
         attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         attack.AddTransition(Transition.Panic, FSMStateID.Fleeing);
-
+        attack.AddTransition(Transition.TooCloseTooPlayer, FSMStateID.Evade);
+        
         DeadState dead = new DeadState();
         dead.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         
@@ -85,11 +86,16 @@ public class NPCTankController : AdvancedFSM
         flee.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         flee.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
         
+        EvadeState evade = new EvadeState();
+        evade.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        evade.AddTransition(Transition.OutOfEvadingRange, FSMStateID.Patrolling);
+
         AddFSMState(patrol);
         AddFSMState(chase);
         AddFSMState(attack);
         AddFSMState(dead);
         AddFSMState(flee);
+        AddFSMState(evade);
     }
 
     /// <summary>

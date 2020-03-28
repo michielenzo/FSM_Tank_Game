@@ -29,6 +29,7 @@ public class AttackState : FSMState
             Debug.Log("Switch to Chase State");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.SawPlayer);
         }
+        
         //Transition to patrol is the tank become too far
         else if (dist >= 300.0f) {
             Debug.Log("Switch to Patrol State");
@@ -38,6 +39,13 @@ public class AttackState : FSMState
         if (npc.GetComponent<NPCTankController>().health < 100)
         {
             npc.GetComponent<NPCTankController>().SetTransition(Transition.Panic);
+        }
+        
+        //Transition to the Evading state if the player is too close.
+        if (Vector3.Distance(player.transform.position, npc.transform.position) <=
+            EvadeState.evadingStateTriggerDistance)
+        {
+            npc.GetComponent<NPCTankController>().SetTransition(Transition.TooCloseTooPlayer);
         }
     }
 

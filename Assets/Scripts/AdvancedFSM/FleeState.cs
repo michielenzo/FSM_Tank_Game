@@ -17,13 +17,12 @@ public class FleeState: FSMState
         const float fleeingRange = 500f;
         float distanceTowardsPlayer = Vector3.Distance(npc.position, player.position);
         if (!(distanceTowardsPlayer >= fleeingRange)) return;
-        Debug.Log("Switch to patrol state");
         npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
     }
 
     public override void Act(Transform player, Transform npc)
     {
-        //In fleeing state the tank turns around towards the opposite direction towards the player tank.
+        //In fleeing state the tank turns around towards the opposite direction of the player tank.
         //The direction from the npc tank towards the player tank is calculated. 
         //This direction is then inverted and given a magnitude with the fleeingDistance.
         const float fleeingDistance = 300f;

@@ -17,7 +17,9 @@ public enum Transition
     ReachPlayer,
     LostPlayer,
     NoHealth,
-    Panic
+    Panic,
+    TooCloseTooPlayer,
+    OutOfEvadingRange,
 }
 
 public enum FSMStateID
@@ -27,7 +29,8 @@ public enum FSMStateID
     Chasing,
     Attacking,
     Dead,
-    Fleeing
+    Fleeing,
+    Evade,
 }
 
 public class AdvancedFSM : FSM 
